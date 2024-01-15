@@ -1,0 +1,66 @@
+
+
+    <div class="frame3-frame1">
+      <span class="frame3-text61"><span>
+        <a href="<?php echo e(route('master.wholeAdd')); ?>">도매장</a>
+      </span></span>
+    </div>
+    <div class="frame3-frame2">
+      <span class="frame3-text63"><span>
+        <a href="<?php echo e(route('master.storeAdd')); ?>">업소</a></span></span>
+    </div>
+    <div class="frame3-frame3">
+      <span class="frame3-text65"><span><a href="<?php echo e(route('master.goodsAdd')); ?>">상품</a></span></span>
+    </div>
+    <div class="frame3-frame4">
+      <span class="frame3-text67"><span><a href="<?php echo e(route('master.fixAdd')); ?>">수리업무</a></span></span>
+    </div>
+    <div class="frame3-frame5">
+      <span class="frame3-text69"><span><a href="<?php echo e(route('master.empAdd')); ?>">영업사원</a></span></span>
+    </div>
+  </div>
+  <input type="text"
+    alt="적용일자" name="applyDate" id="datepicker"
+    class="frame3-rectangle46" value="2024-01-01"
+  />
+  <img
+    alt="iconamoonarrowup23243"
+    src="../public2/iconamoonarrowup23243-bnss.svg"
+    class="frame3-iconamoonarrowup2"
+  />
+  <div class="frame3-frame32">
+    <div class="frame3-gnb">
+      <span class="frame3-text73"><span>마스터</span></span>
+    </div>
+    <div class="frame3-gnb1">
+      <span class="frame3-text75"><span>업무</span></span>
+    </div>
+    <div class="frame3-gnb2">
+      <span class="frame3-text77"><span>발행</span></span>
+    </div>
+    <div class="frame3-gnb3">
+      <span class="frame3-text79"><span>채권</span></span>
+    </div>
+    <div class="frame3-gnb4">
+      <span class="frame3-text81"><span>세금계산서</span></span>
+    </div>
+  </div>
+
+  <div class="frame3-btn-off-on">
+    <div class="frame3-btn-off-on1">
+      <span class="frame3-text83"><input type="radio" name="chk_status" value="N"><span>OFF</span></span>
+    </div>
+    <div class="frame3-btn-off-on2">
+      <span class="frame3-text85"><input type="radio" name="chk_status" value="Y" checked><span>ON</span></span>
+    </div>
+  </div>
+  <div class="frame3-footer">
+    <img
+      alt="Rectangle33I404"
+      src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/a2371726-1231-4933-980c-61c0c76da7a0/f750d9c9-b2d2-41b3-a7e6-4467ee425c57?org_if_sml=1845&amp;force_format=original"
+      class="frame3-rectangle331"
+    />
+    <span class="frame3-text87">
+      <span>Copyright © 2023 릴랩. all rights reserved</span>
+    </span>
+  </div><?php /**PATH C:\Users\01064\OneDrive\바탕 화면\task\lilablaravel\lilab\resources\views/include/nav1.blade.php ENDPATH**/ ?>

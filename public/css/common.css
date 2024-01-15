@@ -1,0 +1,170 @@
+.page-footert-text {
+    top: 28px;
+    left: 836px;
+    color: rgba(134, 134, 134, 1);
+    height: auto;
+    position: absolute;
+    font-size: 12px;
+    font-style: Medium;
+    text-align: center;
+    font-family: Poppins;
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+}
+.addNavMain {
+    gap: 46px;
+    top: 140px;
+    left: 250px;
+    width: 474px;
+    display: flex;
+    padding: 8px;
+    position: absolute;
+    align-items: flex-start;
+}
+.addNavSub1 {
+    gap: 8px;
+    display: flex;
+    padding: 8px 0;
+    align-items: center;
+    border-color: rgba(255, 255, 255, 1);
+    border-style: solid;
+    border-width: 0 0 4px;
+    justify-content: center;
+  }
+  .addNavSub2 {
+    gap: 8px;
+    display: flex;
+    padding: 8px 0;
+    align-items: center;
+    border-color: rgba(83, 176, 222, 0.949999988079071);
+    border-style: solid;
+    border-width: 0 0 4px;
+    justify-content: center;
+  }
+  .page-text-gray {
+    color: rgba(155, 155, 155, 0.949999988079071);
+    height: auto;
+    font-size: 16px;
+    font-style: Bold;
+    text-align: left;
+    font-family: NanumBarunGothic;
+    font-weight: 700;
+    line-height: 100%;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .page-text-skyblue {
+    color: var(--dl-color-default-skyblue);
+    height: auto;
+    font-size: 16px;
+    font-style: Bold;
+    text-align: left;
+    font-family: NanumBarunGothic;
+    font-weight: 700;
+    line-height: 100%;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .main-nav-main {
+    gap: 36px;
+    top: 36px;
+    left: 489px;
+    width: 405px;
+    display: flex;
+    padding: 8px;
+    position: absolute;
+    align-items: flex-start;
+  }
+  .page-gnb-skyblue {
+    gap: 8px;
+    display: flex;
+    padding: 10px 0;
+    align-items: center;
+    border-color: rgba(83, 176, 222, 0.949999988079071);
+    border-style: solid;
+    border-width: 0 0 1px;
+    justify-content: center;
+  }
+  .page-gnb-gray {
+    gap: 8px;
+    display: flex;
+    padding: 10px 0;
+    align-items: center;
+    border-color: rgba(46, 46, 46, 1);
+    border-style: solid;
+    border-width: 0 0 1px;
+    justify-content: center;
+  }
+  .page-mainNav-text-skyblue {
+    color: var(--dl-color-default-skyblue);
+    height: auto;
+    font-size: 16px;
+    font-style: Bold;
+    text-align: left;
+    font-family: NanumBarunGothic;
+    font-weight: 700;
+    line-height: 100%;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .page-mainNav-text-white {
+    color: var(--dl-color-default-white);
+    height: auto;
+    font-size: 16px;
+    font-style: Bold;
+    text-align: left;
+    font-family: NanumBarunGothic;
+    font-weight: 700;
+    line-height: 100%;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+
+  .logout-text-1 {
+    top: 51px;
+    left: 1445px;
+    color: rgba(255, 255, 255, 1);
+    height: auto;
+    position: absolute;
+    font-size: 12px;
+    font-style: Medium;
+    text-align: left;
+    font-family: Noto Sans;
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+
+  .logout-text-2 {
+    top: 48px;
+    left: 1524px;
+    color: var(--dl-color-default-skyblue);
+    height: auto;
+    position: absolute;
+    font-size: 16px;
+    font-style: Medium;
+    text-align: left;
+    font-family: Noto Sans;
+    font-weight: 500;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: underline;
+  }
+  .logout-text-3 {
+    top: 114px;
+    left: 258px;
+    color: rgba(16, 16, 16, 1);
+    height: auto;
+    position: absolute;
+    font-size: 26px;
+    font-style: Bold;
+    text-align: left;
+    font-family: NanumBarunGothic;
+    font-weight: 700;
+    line-height: 100%;
+    font-stretch: normal;
+    text-decoration: none;
+  }

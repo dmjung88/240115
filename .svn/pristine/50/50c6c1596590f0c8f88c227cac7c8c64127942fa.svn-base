@@ -1,0 +1,17 @@
+<div class="main-nav-main">
+    <div class="page-gnb-skyblue">
+      <span class="page-mainNav-text-skyblue"><span>마스터</span></span>
+    </div>
+    <div class="page-gnb-gray">
+      <span class="page-mainNav-text-white"><span>업무</span></span>
+    </div>
+    <div class="page-gnb-gray">
+      <span class="page-mainNav-text-white"><span>발행</span></span>
+    </div>
+    <div class="page-gnb-gray">
+      <span class="page-mainNav-text-white"><span>채권</span></span>
+    </div>
+    <div class="page-gnb-gray">
+      <span class="page-mainNav-text-white"><span>세금계산서</span></span>
+    </div>
+</div><?php /**PATH C:\Users\01064\OneDrive\바탕 화면\task\lilablaravel\lilab\resources\views/include/mainNav.blade.php ENDPATH**/ ?>

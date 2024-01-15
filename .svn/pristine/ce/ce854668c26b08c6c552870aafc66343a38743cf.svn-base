@@ -1,0 +1,17 @@
+<div class="addNavMain">
+  <div class="addNavSub1">
+    <span class="page-text-gray"><span><a href="<?php echo e(route('master.wholeAdd')); ?>">도매장</a></span></span>
+  </div>
+  <div class="addNavSub1">
+    <span class="page-text-gray"><span><a href="<?php echo e(route('master.storeAdd')); ?>">업소</a></span></span>
+  </div>
+  <div class="addNavSub1">
+    <span class="page-text-gray"><span><a href="<?php echo e(route('master.goodsAdd')); ?>">상품</a></span></span>
+  </div>
+  <div class="addNavSub2">
+    <span class="page-text-skyblue"><span><a href="<?php echo e(route('master.fixAdd')); ?>">수리업무</a></span></span>
+  </div>
+  <div class="addNavSub1">
+    <span class="page-text-gray"><span><a href="<?php echo e(route('master.empAdd')); ?>">영업사원</a></span></span>
+  </div>
+</div><?php /**PATH C:\Users\01064\OneDrive\바탕 화면\task\lilablaravel\lilab\resources\views/include/masterAddNav.blade.php ENDPATH**/ ?>

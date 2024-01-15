@@ -1,0 +1,3 @@
+
+ <h1><?php echo e($mailData['title']); ?></h1>
+ <p><?php echo e($mailData['body']); ?></p><?php /**PATH C:\Users\01064\OneDrive\바탕 화면\task\lilablaravel\lilab\resources\views/emails/emailView.blade.php ENDPATH**/ ?>

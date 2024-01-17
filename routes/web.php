@@ -19,6 +19,7 @@ use App\Http\Controllers\View\ViewController;
 */
 
 //Auth::routes();
+Route::any('/authen/login', [SignUpController::class, 'getLogin']);
 Route::any('/model/CustomMethod', [App\Http\Controllers\HomeController::class, 'modelCustomMethod']);
 Route::any('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/admin/dashboard',[SignUpController::class, 'dashboard'])->middleware('authCheck');

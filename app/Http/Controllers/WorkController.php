@@ -18,14 +18,11 @@ class WorkController extends Controller
         $storeCode = DB::selectOne("SELECT STORE_CODE FROM t_master_store WHERE STORE_NAME = ?", [$request->storeName]);
         $validator = Validator::make($request->all(), [ // Form_validation
             'workDate'  => 'required|date', //'2020-01-01 00:00:00'
-            'workType'  => 'required|regex:/^[ㄱ-ㅎ가-힣a-zA-Z0-9\s]+/|max:30',
-            'workTitle' => 'required|regex:/^[ㄱ-ㅎ가-힣a-zA-Z0-9\s]+/|max:30',
+            'workType'  => 'regex:/^[ㄱ-ㅎ가-힣a-zA-Z0-9\s]+/|max:30',
+            'workTitle' => 'regex:/^[ㄱ-ㅎ가-힣a-zA-Z0-9\s]+/|max:30',
             'storeName' => 'required|regex:/^[ㄱ-ㅎ가-힣a-zA-Z0-9\s]+/|max:30',
             'wholeName' => 'required|regex:/^[ㄱ-ㅎ가-힣a-zA-Z0-9\s]+/|max:30',
-            'workPhone' => 'required|max:13',
-            'zipCode' => 'required',
-            'addr' => 'required',
-            'addrDetail' => 'required',
+            'workPhone' => 'max:13',
         ]);
         $response = array('response' => '', 'success'=> false);
         if ($validator->fails()) {
@@ -75,17 +72,17 @@ class WorkController extends Controller
     }
 
     //22 해당업무 저장
-    public function workProSave(Request $request) {
-        
+    public function workProSave(Request $request) {   
+
+        // dd($request->input());
         @$wholeCode = DB::selectOne("SELECT WHOLE_CODE FROM t_master_wholesale WHERE WHOLE_NAME = ?", [$request->wholeName]);
-        @$storeCode = DB::selectOne("SELECT STORE_CODE FROM t_master_store WHERE STORE_NAME = ?", [$request->storeName]);
+        @$storeCode = DB::selectOne("SELECT STORE_CODE,STORE_PHONE,STORE_BIZ FROM t_master_store WHERE STORE_NAME = ?", [$request->storeName]);
         @$goodsCode = DB::select("SELECT GOODS_CODE FROM t_master_goods WHERE GOODS_NAME = ?", [$request->goodsName]);
         
-        if(!$storeCode) { // 업무처리시 업소 검색 안될때 업소 입력부터
+        if(empty($storeCode->STORE_BIZ)) { // 상점정보 덮어씌우기
             $rules = [
                 'newStoreName'=>'required|max:30|string|regex:/^[가-힣a-zA-Z0-9\s]+/',
                 'wholeName'=>'required|max:30',
-                'storePhone'=>'required|max:13|min:8',
             ];
             $response = array('response' => '', 'success'=> false);
             $validator = Validator::make($request->all(), $rules); // Form_validation
@@ -93,32 +90,37 @@ class WorkController extends Controller
                 $response['response'] = $validator->messages();
                 return response()->json($response);
             } else {
-                DB::table('t_master_store')->insert([
+                DB::table('t_master_store')->updateOrInsert(
+                [
+                    'STORE_NAME' => $request->newStoreName
+                ],
+                [
                     'ICE_CODE' => $request->get('iceCode'),
                     'STORE_CODE' => "S" . Master::sCodeSeq(),
                     'STORE_NAME' => $request->get('newStoreName'),
                     'STORE_PHONE' => str_replace('-', '',$request->input('storePhone')),
+                    'STORE_ADDRESS' => $request->addr." ".$request->addrDetail,
+                    'STORE_ZIPCODE' => $request->get('zipCode'),
                     'REG_ID' => $request->get('regId'),
                     'APPLY_DATE' => now(),
+                    'WHOLE_CODE' => $wholeCode->WHOLE_CODE ?? "",
+                    'WHOLE_NAME' => $request->wholeName,
                 ]);
             }
         }     
         $validator = Validator::make($request->all(), [ 
             'storeName' => 'required|regex:/^[ㄱ-ㅎ가-힣a-zA-Z0-9\s]+/|max:30', 
             'workDate'  => 'required|date', //'2020-01-01 00:00:00'
-            'empCode' => 'required|max:30', 
-            'empName' => 'required|max:30', 
+            'empCode' => 'max:30', 
+            'empName' => 'max:30', 
             'workCode'  => 'required', 
             'goodsName'  => 'required', 
-            'note' => 'required',  
-            'zipCode' => 'required',  
-            'storePhone' => 'required|max:13', 
-            'workTxt' => 'required', 
-            'addr' => 'required', 
-            'addrDetail' => 'required', 
-            "fixCode"   => 'required', 
-            "amount"    => 'required|integer', 
-            "salesCost" => 'required|integer', 
+            'storePhone' => 'max:13', 
+            'ajaxAmount_.*' => 'required|integer', 
+            'ajaxSalesCost_.*' => 'required|integer', 
+            'ajaxFixName_*' => 'required',
+            'ajaxFixCode_*' => 'required',
+
         ]);
 
         $response = array('response' => '', 'success'=> false);
@@ -140,20 +142,17 @@ class WorkController extends Controller
                 'WORK_CODE' => $request->input('workCode'),
                 'REG_DATE' => now(),
             ]);
-            @$fixData = DB::select("SELECT FIX_NAME, MARGIN_PER, PURCH_COST FROM t_master_fix WHERE FIX_CODE = ?", [$request->fixCode]);
-         
-            DB::table('t_fix_cost')->insert([
-                'FIX_COST_IDX' => $idx,
-                'FIX_CODE' => $request->fixCode,
-                'FIX_NAME' => $fixData[0]->FIX_NAME ?? "",
-                'FIX_CNT' => $request->amount,
-                'SALES_COST' => $request->input('totalData'),
-                'PURCH_COST' => $fixData[0]->PURCH_COST ?? "0",
-                'MARGIN_PER' => $fixData[0]->MARGIN_PER ?? "0",
-                'REG_ID' => $request->regId,
-                'REG_DATE' => now(),
-            ]);
-            
+            foreach ($request->ajaxAmount_ as $key => $value) {
+                DB::table('t_fix_cost')->insert([      
+                    'FIX_COST_IDX' => $idx,
+                    'FIX_CODE' => $request->ajaxFixCode_[$key],
+                    'FIX_NAME' => $request->ajaxFixName_[$key],
+                    'SALES_COST' => $request->ajaxSalesCost_[$key],
+                    'FIX_CNT' => $request->ajaxAmount_[$key] ,
+                    'REG_ID'  => $request->regId,
+                    'REG_DATE'  => now(),
+                ]);
+            }
             $response['response'] = ["message"=> "해당업무 저장 성공" ];
             $response['success'] = true;
         }
@@ -260,18 +259,8 @@ class WorkController extends Controller
         ->select("FIX_CODE","FIX_NAME","PURCH_COST","SALES_COST","MARGIN_PER")
         ->where("FIX_CODE",$request->fixCode)
         ->first();
-        $output = "";
-        $output .="
-        <tr>
-        <td class='frame-text120'><input type='text' name='ajaxAmount' value='{$request->amount}'></td>
-        <td class='frame-text121'><input type='text' name='ajaxSalesCost' value='{$workDetail->SALES_COST}'></td>
-        <td class='frame-text123'><input type='text' name='ajaxFixName' value='{$workDetail->FIX_NAME}'></td>
-        <td class='frame-text125'><input type='text' name='ajaxFixCode' value='{$workDetail->FIX_CODE}'></td>
-        <td class='frame-text127'><input type='text' name='ajaxTotalData' value='{$request->totalData}'></td>
-        </tr>
-        "; 
-
-        $response = array('response' => ["message"=> "수리,수량,매출가", "data"=>$output], 'success'=> true);
+        $response = array('response' => ["message"=> "수리,수량,매출가", "data"=>$workDetail], 'success'=> true);
         return Response::json($response, 200);
     }
+   
 }

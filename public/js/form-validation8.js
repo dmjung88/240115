@@ -201,7 +201,8 @@ $(function() {
             $("#totalData").val(total);
         }
     })
-    
+
+    // tbody tr 추가
     if ($("[name=fixCode]").val() === "") {
         $(window).keydown(function(event){
             const formData = { 
@@ -210,24 +211,21 @@ $(function() {
                 salesCost : $('[name= salesCost]').val(),
                 totalData : $('#totalData').val()
             }
-            // var formData = [];
-            // $(".fixDataTable").each(function(index) {
-            //     var fixCode   = $(this).find('[name= fixCode]').eq(index).val();
-            //     var amount = $(this).find('[name= amount]').eq(index).val();
-            //     var salesCost   = $(this).find('[name= salesCost]').eq(index).val();
-            //     var totalData = $(this).find('#totalData').eq(index).val();
-            //     formData.push({
-            //         fixCode: fixCode,
-            //         amount: amount,
-            //         salesCost: salesCost,
-            //         totalData: totalData
-            //     })
-            // });
+            const $o = $('#workProFrm tr').last(); //선택자 마지막 번째 요소
             if(event.keyCode == 13) {
                 event.preventDefault();
-                $.get("/api/work/fixSalseData", formData , (rs) => {
-                    console.info(rs);
-                    $(".fixDataTable").append(rs.response.data);
+                $.get("/api/work/fixSalseData", formData , (rs) => {         
+                    var $output = "";
+                    $output +=`
+                    <tr>
+                    <td class='frame-text120'><input type='text' name='ajaxAmount_[${$o.index() + 1}]' class="ajaxAmount" value='${formData.amount}'></td>
+                    <td class='frame-text121'><input type='text' name='ajaxSalesCost_[${$o.index() + 1}]' class="ajaxSalesCost" value='${rs.response.data.SALES_COST}'></td>
+                    <td class='frame-text123'><input type='text' name='ajaxFixName_[${$o.index() + 1}]' class="ajaxFixName" value='${rs.response.data.FIX_NAME}'></td>
+                    <td class='frame-text125'><input type='text' name='ajaxFixCode_[${$o.index() + 1}]' class="ajaxFixCode" value='${rs.response.data.FIX_CODE}'></td>
+                    <td class='frame-text127'><input type='text' name='ajaxTotalData_[${$o.index() + 1}]' class="ajaxTotalData" value='${formData.totalData}'></td>
+                    </tr>
+                    `; 
+                    $('.fixDataTable').append($output);
                     $('[name= fixCode]').val(""),
                     $('[name= amount]').val(""),
                     $('[name= salesCost]').val(""),
@@ -237,7 +235,6 @@ $(function() {
                 // return false;
         });
     }
- 
 
 }); //endJQ
 
@@ -307,12 +304,11 @@ function checkInput() { //유효성
     const zipCode = document.getElementById('zipCode');
     const note = document.getElementById('note');
 
-    if(checkRequired([storeName, goodsName ,newStoreName, storePhone, workCode, wholeName
-        , workTxt, goodsDiv, empCode, empName, addr, addrDetail, zipCode, note ])){
+    if(checkRequired([storeName, goodsName ,newStoreName, workCode, wholeName, goodsDiv])){
         if(checkLength(storeName, 1, 30)){
         if(checkLength(newStoreName, 1, 30)) {
         if(checkLength(storePhone, 8, 13)) {
-        if(checkLength(note, 1, 30)) {     
+        if(checkLength(note, 0, 30)) {     
         // 여기부터  
             if(!onlyKorNum.test(storeName.value.trim())) {
                 alert("업소명을 정확히 입력해주세요.");

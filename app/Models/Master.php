@@ -20,72 +20,72 @@ class Master extends Model
     public static  function  wCodeSeq() :string
     {       
         $wCount =DB::table('t_master_wholesale')->count();
-        $length = intval(strlen( $wCount )) + 1 ;
+        $length = intval(strlen( $wCount + (int)1 )) ;
         switch ($length) {
-            case 1: return "000".$wCount + 1; break;
-            case 2: return "00" .$wCount + 1; break;
-            case 3: return "0"  .$wCount + 1; break;
-            default: return   $wCount + 1;
+            case 1: return "000".intval($wCount + 1); break;
+            case 2: return "00" .intval($wCount + 1); break;
+            case 3: return "0"  .intval($wCount + 1); break;
+            default: return  (int)$wCount + 1;
         }
         exit;
     }
     public static  function  sCodeSeq() :string
     {       
         $wCount =DB::table('t_master_store')->count();
-        $length = (int)strlen( $wCount ) + 1;
+        $length = intval(strlen( $wCount + (int)1 )) ;
         switch ($length) {
             case 1: return "000".$wCount + 1; break;
-            case 2: return "00" .$wCount + 1; break;
-            case 3: return "0"  .$wCount + 1; break;
-            default: return   $wCount + 1;
+            case 2: return "00" .intval($wCount + 1); break;
+            case 3: return "0"  .intval($wCount + 1); break;
+            default: return   intval($wCount + 1);
         }
         exit;
     }
     public static  function  gCodeSeq() :string
     {       
         $wCount =DB::table('t_master_goods')->count();
-        $length = intval(strlen( $wCount )) + 1;
+        $length = intval(strlen( $wCount + (int)1 )) ;
         switch ($length) {
-            case 1: return "000".$wCount + 1; break;
-            case 2: return "00" .$wCount + 1; break;
-            case 3: return "0"  .$wCount + 1; break;
-            default: return   $wCount + 1;
+            case 1: return "000".intval($wCount + 1); break;
+            case 2: return "00" .intval($wCount + 1); break;
+            case 3: return "0"  .intval($wCount + 1); break;
+            default: return   intval($wCount + 1);
         }
         exit;
     }
     public static  function  fCodeSeq() :string
     {       
         $wCount =DB::table('t_master_fix')->count();
-        $length = intval(strlen( $wCount )) + 1;
+        $length = intval(strlen( $wCount + (int)1 )) ;
         switch ($length) {
-            case 1: return "000".$wCount + 1; break;
-            case 2: return "00" .$wCount + 1; break;
-            case 3: return "0"  .$wCount + 1; break;
-            default: return   $wCount + 1;
+            case 1: return "000".intval($wCount + 1); break;
+            case 2: return "00" .intval($wCount + 1); break;
+            case 3: return "0"  .intval($wCount + 1); break;
+            default: return   intval($wCount + 1);
         }
         exit;
     }
     public static  function  cCodeSeq() :string
     {       
         $wCount =DB::table('t_master_ice')->count();
-        $length = intval(strlen( $wCount )) + 1;
+        $length = intval(strlen( $wCount + (int)1 )) ;
         switch ($length) {
-            case 1: return "000".$wCount + 1; break;
-            case 2: return "00" .$wCount + 1; break;
-            case 3: return "0"  .$wCount + 1; break;
-            default: return   $wCount + 1;
+            case 1: return "000".intval($wCount + 1); break;
+            case 2: return "00" .intval($wCount + 1); break;
+            case 3: return "0"  .intval($wCount + 1); break;
+            default: return   intval($wCount + 1);
         }
         exit;
     }
     public static  function  eCodeSeq() :string
     {       
         $wCount =DB::table('t_master_emp')->count();
-        $length = intval(strlen( $wCount )) + 1;
+        $length = intval(strlen( $wCount + (int)1 )) ;
         switch ($length) {
-            case 1: return "000".$wCount + 1; break;
-            case 2: return "00" .$wCount + 1; break;
-            case 3: return "0"  .$wCount + 1; break;
-            default: return   $wCount + 1;
+            case 1: return "000".intval($wCount + 1); break;
+            case 2: return "00" .intval($wCount + 1); break;
+            case 3: return "0"  .intval($wCount + 1); break;
+            default: return   intval($wCount + 1);
         }
         exit;
     }

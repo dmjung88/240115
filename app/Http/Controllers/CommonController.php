@@ -23,7 +23,7 @@ class CommonController extends Controller
     public function wholeSaleSearch(Request $request)   {
         $wholeCode = str_replace('-', '', $request->search);
         $wholeSale = DB::table('t_master_wholesale')
-        ->select("WHOLE_NAME")
+        ->select("ICE_CODE","WHOLE_CODE","WHOLE_NAME")
         ->where('WHOLE_CODE', 'like', '%'.$wholeCode.'%')
         ->orwhere('WHOLE_NAME', 'like', '%'.$wholeCode.'%')
         ->get();
@@ -34,6 +34,7 @@ class CommonController extends Controller
     public function wholesaleBizNumSearch(Request $request) {
         $wholeBizNum = str_replace('-', '', $request->search);
         $wholesaleBizNum = DB::table('t_master_wholesale')
+        ->select("ICE_CODE","WHOLE_CODE","WHOLE_NAME")
         ->where('WHOLE_BIZ_NUM', 'like', '%'.$wholeBizNum.'%')
         ->get(); 
         $response = array('response' => ["message"=> "도매장 사업자번호로 검색", "data"=> $wholesaleBizNum], 'success'=> true);
@@ -56,10 +57,10 @@ class CommonController extends Controller
 
     // 6 상품명 코드 또는 이름 검색
     public function goodsSearch(Request $request) {
-        $goodsSearch = str_replace('-', '', $request->search);
         $goodsResult = DB::table('t_master_goods')
-        ->where('GOODS_CODE', 'like', '%'.$goodsSearch.'%')
-        ->orwhere('GOODS_NAME', 'like', '%'.$goodsSearch.'%')
+        ->select("GOODS_NAME","GOODS_CODE","GOODS_DIV","GOODS_VOL","GOODS_TYPE","GOODS_NICK")
+        ->where('GOODS_CODE', 'like', '%'.$request->search.'%')
+        ->orwhere('GOODS_NAME', 'like', '%'.$request->search.'%')
         ->get();
         $response = array('response' => ["message"=> "상품 검색", "data"=> $goodsResult], 'success'=> true);
         return Response::json($response, 200);
@@ -67,10 +68,9 @@ class CommonController extends Controller
 
     // 7 제조사명 검색
     public function makerSearch(Request $request) {
-        $makerSearch = str_replace('-', '', $request->search);
         $makerResult = DB::table('t_master_goods')
         ->select("GOODS_MAKER","GOODS_CODE")
-        ->where('GOODS_MAKER', 'like', '%'.$makerSearch.'%')
+        ->where('GOODS_MAKER', 'like', '%'.$request->search.'%')
         ->get();
         $response = array('response' => ["message"=> "제조사명 검색", "data"=> $makerResult], 'success'=> true);
         return Response::json($response, 200);

@@ -50,10 +50,6 @@ function checkInput() {
         alert("도매장명을 정확히 입력해주세요");
         wholeName.focus();
         return false;
-    } else if(wholePhoneValue === "") { //전화번호
-        alert("전화번호 미입력");
-        wholePhone.focus();
-        return false;
     } else if(wholePhoneValue.length < 8 || wholePhoneValue.length > 13) {
         alert("전화번호를 다시한번 확인해주세요");
         wholePhone.focus();
@@ -75,23 +71,15 @@ function checkInput() {
     } else if(wholeBizNumCheck == false) {
         alert("사업자 중복체크 버튼을 눌러주세요.");
         return false;
-    } else if(wholeCeoValue == "") { //대표자명
-        alert("대표자명 미입력");
-        wholeCeo.focus();
-        return false;
     } else if(!onlyKorNum.test(wholeCeoValue)) {
         alert("대표자명을 정확히 입력해주세요");
         wholeCeo.focus();
         return false;
-    } else if(wholeCeoValue.length < 2 || wholeCeoValue.length > 10) {
+    } else if(wholeCeoValue.length < 0 || wholeCeoValue.length > 10) {
         alert("대표자명을 다시한번 확인해주세요");
         wholeCeo.focus();
         return false;
-    } else if (wholeBizValue === "") { //업태
-        alert("업태 미입력");
-        wholeBiz.focus();
-        return false;
-    } else if (wholeBizValue.length < 2 || wholeBizValue.length > 10) {
+    } else if (wholeBizValue.length < 0 || wholeBizValue.length > 10) {
         alert("업태를 정확히 입력해주세요");
         wholeBiz.focus();
         return false;
@@ -99,11 +87,7 @@ function checkInput() {
         alert("업태를 정확히 입력해주세요");
         wholeBiz.focus();
         return false;
-    } else if (wholeTypeValue === "") { //종목
-        alert("종목 미입력");
-        wholeType.focus();
-        return false;
-    } else if (wholeTypeValue.length < 2 || wholeTypeValue.length > 10) {
+    } else if (wholeTypeValue.length < 0 || wholeTypeValue.length > 10) {
         alert("종목을 정확히 입력해주세요");
         wholeType.focus();
         return false;
@@ -111,29 +95,17 @@ function checkInput() {
         alert("종목을 정확히 입력해주세요");
         wholeType.focus();
         return false;
-    } else if(addrValue === "") { //주소
-        alert("주소 미입력");
-        addr.focus();
-        return false;
     } else if(addrDetailValue === "") { //상세 주소
         alert("상세주소 미입력");
         addrDetail.focus();
         return false;
-    } else if(wholeZipcodeValue === "") { //우편번호
-        alert("우편번호 미입력 미입력");
-        wholeZipcode.focus();
-        return false;
-    } else if (wholeZipcodeValue.length < 5 || wholeZipcodeValue.length > 7) {
+    } else if (wholeZipcodeValue.length < 0 || wholeZipcodeValue.length > 7) {
         alert("우편번호를 정확헤 입력해주세요");
         wholeZipcode.focus();
         return false;
     } else if (onlyNumFn(wholeZipcodeValue) == false) {
         alert("우편번호는 숫자만 입력해주세요");
         wholeZipcode.focus();
-        return false;
-    } else if(wholeEmailValue == "") { //이메일
-        alert("이메일 미입력");
-        wholeEmail.focus();
         return false;
     } else if(!isValidateEmail(wholeEmailValue)) {
         alert("이메일을 형식에 맞게 입력해주세요.");

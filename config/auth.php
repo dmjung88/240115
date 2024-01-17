@@ -7,9 +7,9 @@ return [
     | Authentication Defaults
     |--------------------------------------------------------------------------
     |
-    | This option controls the default authentication "guard" and password
-    | reset options for your application. You may change these defaults
-    | as required, but they're a perfect start for most applications.
+    | 이 옵션은 기본 인증 "guard" 및 passwords 제어합니다
+    | 응용 프로그램의 옵션을 재설정합니다. 이 기본값을 변경할 수 있습니다
+    | 필요에 따라 대부분의 애플리케이션에서 완벽한 시작입니다.
     |
     */
 
@@ -23,13 +23,13 @@ return [
     | Authentication Guards
     |--------------------------------------------------------------------------
     |
-    | Next, you may define every authentication guard for your application.
-    | Of course, a great default configuration has been defined for you
-    | here which uses session storage and the Eloquent user provider.
+    | 다음으로 애플리케이션에 대한 모든 인증 가드를 정의할 수 있습니다.
+    | 물론 훌륭한 기본 구성이 정의되었습니다
+    | 여기서는 세션 저장소와 Eloquent  사용자 제공자를 사용합니다.
     |
-    | All authentication drivers have a user provider. This defines how the
-    | users are actually retrieved out of your database or other storage
-    | mechanisms used by this application to persist your user's data.
+    | 모든 인증 드라이버에는 사용자 제공자가 있습니다. 이것은 다음과 같은 방법을 정의합니다
+    | 사용자는 실제로 데이터베이스 또는 다른 스토리지에서 검색됩니다
+    | 사용자의 데이터를 유지하기 위해 이 응용프로그램에서 사용하는 메커니즘입니다.
     |
     | Supported: "session"
     |
@@ -47,13 +47,10 @@ return [
     | User Providers
     |--------------------------------------------------------------------------
     |
-    | All authentication drivers have a user provider. This defines how the
-    | users are actually retrieved out of your database or other storage
-    | mechanisms used by this application to persist your user's data.
     |
-    | If you have multiple user tables or models you may configure multiple
-    | sources which represent each model / table. These sources may then
-    | be assigned to any extra authentication guards you have defined.
+    | 사용자 테이블 또는 모델이 여러 개인 경우 여러 개를 구성할 수 있습니다
+    | 각 모델/테이블을 대표하는 소스입니다. 이 소스들은 다음과 같습니다
+    | 사용자가 정의한 추가 인증 가드에 할당됩니다.
     |
     | Supported: "database", "eloquent"
     |
@@ -76,13 +73,13 @@ return [
     | Resetting Passwords
     |--------------------------------------------------------------------------
     |
-    | You may specify multiple password reset configurations if you have more
-    | than one user table or model in the application and you want to have
-    | separate password reset settings based on the specific user types.
+    | 암호 재설정 구성이 더 많은 경우 여러 개를 지정할 수 있습니다
+    | 애플리케이션에 있는 하나 이상의 사용자 테이블 또는 모델을 사용할 수 있습니다
+    | 특정 사용자 유형에 따라 별도의 암호 재설정 설정을 지정합니다.
     |
-    | The expire time is the number of minutes that each reset token will be
-    | considered valid. This security feature keeps tokens short-lived so
-    | they have less time to be guessed. You may change this as needed.
+    | 만료 시간은 각 재설정 토큰이 사용될 시간(분)입니다
+    | 유효한 것으로 간주됩니다. 이 보안 기능은 토큰의 수명을 짧게 유지하므로
+    | 그들은 추측할 시간이 적습니다. 필요에 따라 이것을 변경할 수 있습니다.
     |
     */
 
@@ -100,9 +97,9 @@ return [
     | Password Confirmation Timeout
     |--------------------------------------------------------------------------
     |
-    | Here you may define the amount of seconds before a password confirmation
-    | times out and the user is prompted to re-enter their password via the
-    | confirmation screen. By default, the timeout lasts for three hours.
+    | 여기서 암호 확인 전 시간(초)을 정의할 수 있습니다
+    | 시간이 초과되고 사용자에게 다음을 통해 암호를 다시 입력하라는 메시지가 표시됩니다
+    | 확인 화면. 기본적으로 타임아웃은 3시간 동안 지속됩니다.
     |
     */
 

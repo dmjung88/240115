@@ -58,11 +58,11 @@ function checkLength(input, min, max) {
 
 
 function checkInput() { //유효성
-    if(checkRequired([fixName, purchCost, marginPer, salesCost, lastModify ,note ])){
+    if(checkRequired([fixName , lastModify ])){
         if(checkLength(fixName, 1, 30)){
-        if(checkLength(purchCost, 1, 8)) {
-        if(checkLength(marginPer, 1, 3)) {
-        if(checkLength(salesCost, 1, 8)) {
+        if(checkLength(purchCost, 0, 8)) {
+        if(checkLength(marginPer, 0, 3)) {
+        if(checkLength(salesCost, 0, 8)) {
         // 여기부터
             if(!onlyKorNum.test(fixName.value.trim())) {
                 alert("수리정보명을 정확히 입력해주세요");

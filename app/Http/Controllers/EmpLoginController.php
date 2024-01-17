@@ -51,7 +51,6 @@ class EmpLoginController extends Controller
                 $response['status'] = 'noUserinfo';
             } else {
                 if(Hash::check($request->empPassword, $userInfo->EMP_PASSWORD)){
-                // if($request->password == $userInfo->EMP_PASSWORD){
                     $request->session()->put('iceCode', $userInfo->ICE_CODE);
                     Session::put('iceConame', $userInfo->ICE_CONAME);
                     Session::put('empGroup', $userInfo->EMP_GROUP); 
@@ -61,14 +60,22 @@ class EmpLoginController extends Controller
                     Session::save();
                     $response['response'] = ["message"=> "수리기사 로그인 성공" ];
                     $response['success'] = true;
-                    $response['status'] = 'ok';
                 } else {
                     $response['response'] = ["message"=> "비밀번호 불일치" ];
                     $response['status'] = 'noPass';
+                    $response['success'] = false;
                 }
             }
         }
-        return Response::json($response, 201);
+        //Response 도우미에 헤더를 세 번째 매개변수로 전달
+        return Response::json($response, 201,
+        [
+            'iceCode' =>$userInfo->ICE_CODE,
+            'empGroup'=> $userInfo->EMP_GROUP,
+            'empCode' => $userInfo->EMP_CODE,
+            'empType' => $userInfo->EMP_TYPE,
+        ]
+        );
     }
 
     public function companyLogin(Request $request){
@@ -94,7 +101,6 @@ class EmpLoginController extends Controller
                 $response['status'] = 'noUserinfo';
             } else {
                 if(Hash::check($request->password, $userInfo->EMP_PASSWORD)){
-                //if($request->password == $userInfo->EMP_PASSWORD){
                     $request->session()->put('iceCode', $userInfo->ICE_CODE);
                     Session::put('iceConame', $userInfo->ICE_CONAME);
                     Session::put('empGroup', $userInfo->EMP_GROUP); 
@@ -103,14 +109,21 @@ class EmpLoginController extends Controller
                     Session::save();
                     $response['response'] = ["message"=> "회사관리자 로그인 성공" ];
                     $response['success'] = true;
-                    $response['status'] = 'ok';
                 } else {
                     $response['response'] = ["message"=> "비밀번호 불일치" ];
                     $response['status'] = 'noPass';
+                    $response['success'] = false;
                 }
             }
         }
-        return Response::json($response, 201);
+        // 네트워크-헤더 확인
+        return Response::json($response, 201,
+        [
+            'iceCode' =>$userInfo->ICE_CODE,
+            'empGroup'=> $userInfo->EMP_GROUP,
+            'empCode' => $userInfo->EMP_CODE,
+            'empType' => $userInfo->EMP_TYPE,
+        ]);
     }
     public function dashboard() {
         if(Session::has('LoggedUserId')) {
@@ -125,7 +138,9 @@ class EmpLoginController extends Controller
             //Session::forget('LoggedUserName');
             Session::flush();
             //Auth::logout();
-            return redirect('/');
+            $response = array('response' => '', 'success'=> true);
+            $response['response'] = ["message"=> "로그아웃 성공" ];
+            return response()->json($response);
         }
     }
 }

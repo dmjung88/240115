@@ -38,16 +38,11 @@ class MasterController extends Controller
     public function wholesaleSave(Request $request) { // 도매장 저장
         $validator = Validator::make($request->all(), [ // Form_validation
             'wholeName'  => 'required|max:30|string|regex:/^[가-힣a-zA-Z0-9\s]+/',
-            'wholePhone' => 'required|max:13|min:8',
-            'wholeCeo'  => 'required|max:10',
-            'wholeBiz'   => 'required|max:10',
+            'wholePhone' => 'max:13',
+            'wholeCeo'  => 'max:10',
+            'wholeBiz'   => 'max:10',
             'wholeBizNum' => 'required|max:10|unique:t_master_wholesale,WHOLE_BIZ_NUM',
-            'wholeType'  => 'required|max:10',
-            'addr' => 'required',
-            'addrDetail' => 'required',
-            'zipCode' => 'required|max:7',
-            'wholeEmail' => 'required|email',
-            'chk_status' => 'required',
+            'wholeType'  => 'max:10',
 
         ]);
         $response = array('response' => '', 'success'=> false);
@@ -81,17 +76,11 @@ class MasterController extends Controller
         $rules = [
             'storeName'=>'required|max:30|string|regex:/^[가-힣a-zA-Z0-9\s]+/',
             'wholeName'=>'required|max:30',
-            'storePhone'=>'required|max:13|min:8',
-            'storeCeo' =>'required|string|regex:/^[가-힣a-zA-Z\s]+/', 
-            'storeBizNum'=>'required|max:10|unique:t_master_store,STORE_BIZ_NUM', 
-            'storeBiz'=>'required|max:10|regex:/^[가-힣\s]+/', 
-            'storeType'=>'required|max:10|regex:/^[가-힣\s]+/',
-            'empCode' => 'required',
-            'addr' =>'required',
-            'addrDetail' =>'required',
-            'zipCode' => 'required',
-            'chk_status' =>'required',
-            'note' =>'required',
+            'storePhone'=>'max:13',
+            'storeCeo' =>'string|regex:/^[가-힣a-zA-Z\s]+/', 
+            'storeBizNum'=>'max:10|unique:t_master_store,STORE_BIZ_NUM', 
+            'storeBiz'=>'max:10|regex:/^[가-힣\s]+/', 
+            'storeType'=>'max:10|regex:/^[가-힣\s]+/',
             'applyDate' =>'required',
         ];
         $response = array('response' => '', 'success'=> false);
@@ -129,14 +118,12 @@ class MasterController extends Controller
         $validator = Validator::make($request->all(), [ // Form_validation
             'wholeName'  => 'required',
             'goodsName'  => 'required|string|regex:/^[가-힣a-zA-Z0-9\s]+/|max:20',
-            'goodsMaker' => 'required|string|regex:/^[가-힣a-zA-Z0-9\s]+/|max:20',
+            'goodsMaker' => 'string|regex:/^[가-힣a-zA-Z0-9\s]+/|max:20',
             'goodsDiv'   => 'required|string|regex:/^[가-힣a-zA-Z0-9\s]+/|max:10',
             'goodsNick'  => 'required|string|regex:/^[가-힣a-zA-Z0-9\s]+/|max:20',
-            'goodsVol'   => 'required|max:8|regex:/^[a-zA-Z0-9\s]+/',
-            'goodsType'  => 'required|max:20|regex:/^[가-힣a-zA-Z0-9\s]+/',
-            'lastModify' => 'required',
-            'purchCost'  => 'required|integer',
-            'note'       => 'required',
+            'goodsVol'   => 'max:8|regex:/^[a-zA-Z0-9\s]+/',
+            'goodsType'  => 'max:20|regex:/^[가-힣a-zA-Z0-9\s]+/',
+            'purchCost'  => 'integer',
             'chk_status' =>'required',
         ]);
         $response = ['response' => '', 'success'=> false];
@@ -170,10 +157,9 @@ class MasterController extends Controller
     public function fixSave(Request $request) { //수리정보 저장
         $validator = Validator::make($request->all(), [ // Form_validation
             'fixName'  => 'required|string|regex:/^[가-힣a-zA-Z0-9\s]+/|max:30',
-            'purchCost' => 'required|integer',
-            'salesCost' => 'required|integer',
-            'marginPer' => 'required|integer',
-            'note'      => 'required',
+            'purchCost' => 'integer',
+            'salesCost' => 'integer',
+            'marginPer' => 'integer',
             'lastModify'=> 'required',
         ]);
         $response = ['response' => '', 'success'=> false];
@@ -200,11 +186,9 @@ class MasterController extends Controller
     public function employeeSave(Request $request) { //수리기사(영업) 사원 저장
         $validator = Validator::make($request->all(), [ // Form_validation
             'empCode'  => 'required|max:5|unique:t_master_emp,EMP_CODE',
-            'empName'  => 'required|regex:/^[가-힣a-zA-Z0-9\s]+/|max:10',
-            'empPhone' => 'required',
+            'empName'  => 'regex:/^[가-힣a-zA-Z0-9\s]+/|max:10',
             'empPassword' => 'required|regex:/^[a-zA-Z0-9\s]+/|max:16',
             'empType'  => 'required',
-            'chk_status'=> 'required'
         ]);
         $response = ['response' => '', 'success'=> false];
         if ($validator->fails()) {
@@ -231,7 +215,6 @@ class MasterController extends Controller
     public function wholeSaleUpdate(Request $request) {
         $validator = Validator::make($request->all(), [ // Form_validation
             'wholeCode' => 'required',
-
             'wholeName'  => 'required|max:30|regex:/^[가-힣\s]+/|',
             'wholePhone' => 'required|max:11',
             'wholeCeo'  => 'required|max:10',

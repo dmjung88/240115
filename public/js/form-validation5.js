@@ -36,7 +36,7 @@ function checkInput() {
         alert("전화번호 미입력");
         empPhone.focus();
         return false;
-    } else if(empPhoneValue.length < 1 || empPhoneValue.length > 13) {
+    } else if(empPhoneValue.length < 0 || empPhoneValue.length > 13) {
         alert("전화번호를 다시한번 확인해주세요");
         empPhone.focus();
         return false;
@@ -55,11 +55,7 @@ function checkInput() {
         alert("비밀번호를 다시한번 확인해주세요");
         empPassword.focus();
         return false;
-    }  else if(empNameValue === "") { // 사원명
-        alert("이름 미입력");
-        empName.focus();
-        return false;
-    } else if(empNameValue.length < 1 || empNameValue.length > 10) {
+    } else if(empNameValue.length < 0 || empNameValue.length > 10) {
         alert("이름을 다시한번 확인해주세요");
         empName.focus();
         return false;

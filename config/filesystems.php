@@ -20,9 +20,9 @@ return [
     | Filesystem Disks
     |--------------------------------------------------------------------------
     |
-    | Here you may configure as many filesystem "disks" as you wish, and you
-    | may even configure multiple disks of the same driver. Defaults have
-    | been set up for each driver as an example of the required values.
+    | 여기서 원하는 만큼 파일 시스템 "디스크"를 구성할 수 있습니다. 그러면
+    | 동일한 드라이버의 디스크를 여러 개 구성할 수도 있습니다. 기본값은 다음과 같습니다
+    | 각 드라이버에 대해 필요한 값의 예로 설정되었습니다.
     |
     | Supported Drivers: "local", "ftp", "sftp", "s3"
     |

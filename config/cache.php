@@ -22,9 +22,9 @@ return [
     | Cache Stores
     |--------------------------------------------------------------------------
     |
-    | Here you may define all of the cache "stores" for your application as
-    | well as their drivers. You may even define multiple stores for the
-    | same cache driver to group types of items stored in your caches.
+    | 여기서 애플리케이션에 대한 모든 캐시 "스토어"를 다음과 같이 정의할 수 있습니다
+    | 그들의 드라이버. 당신은 심지어 다음을 위해 여러 스토어를 정의할 수도 있습니다
+    | 캐시에 저장된 항목 유형을 그룹화하기 위해 동일한 캐시 드라이버를 사용합니다.
     |
     | Supported drivers: "apc", "array", "database", "file",
     |         "memcached", "redis", "dynamodb", "octane", "null"

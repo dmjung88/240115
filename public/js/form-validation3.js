@@ -60,15 +60,14 @@ function checkInput() { //유효성
     const goodsVol = document.getElementById('goodsVol');
     const note = document.getElementById('note');
 
-    if(checkRequired([goodsName, goodsMaker, goodsDiv, goodsNick,wholeName ,goodsType 
-        ,purchCost ,goodsVol ,note ])){
+    if(checkRequired([goodsName, goodsDiv, goodsNick,wholeName ])){
         if(checkLength(goodsName, 2, 20)){
-        if(checkLength(goodsMaker, 2, 20)) {
+        if(checkLength(goodsMaker, 0, 20)) {
         if(checkLength(goodsDiv, 2, 10)) {
-        if(checkLength(goodsNick, 1, 20)) {
-        if(checkLength(goodsVol, 1, 8)) {
-        if(checkLength(goodsType, 1, 20)) {
-        if(checkLength(purchCost, 1, 8)) {
+        if(checkLength(goodsNick, 0, 20)) {
+        if(checkLength(goodsVol, 0, 8)) {
+        if(checkLength(goodsType, 0, 20)) {
+        if(checkLength(purchCost, 0, 8)) {
         // 여기부터
             if(!onlyKorNum.test(goodsNick.value.trim())) {
                 alert("별칭을 정확히 입력해주세요");

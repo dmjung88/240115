@@ -143,56 +143,16 @@ const checkInput = () => {
         alert("도매장 미입력");
         storeName.focus();
         return false;
-    } else if(storeBizNumValue === "") { 
-        alert("사업자번호 미입력");
-        storeBizNum.focus();
-        return false;
-    } else if(storeBizValue === "") { 
-        alert("업태 미입력");
-        storeBiz.focus();
-        return false;
-    } else if(empCodeValue === "") { 
-        alert("사원번호 미입력");
-        empCode.focus();
-        return false;
-    } else if(empNameValue === "") {
-        alert("사원명 미입력");
-        empName.focus();
-        return false;
-    } else if(storeTypeValue === "") {
-        alert("종목 미입력");
-        storeType.focus();
-        return false;
-    } else if(storePhoneValue === "") {
-        alert("전화번호 미입력");
-        storePhone.focus();
-        return false;
-    } else if(storeCeoValue === "") {
-        alert("대표명 미입력");
-        storeCeo.focus();
-        return false;
-    } else if(zipCodeValue === "") {
-        alert("우편번호 미입력");
-        zipCode.focus();
-        return false;
-    } else if(addrValue === "") {
-        alert("주소 미입력");
-        addr.focus();
-        return false;
-    } else if(addrDetailValue === "") {
-        alert("상세주소 미입력");
-        addrDetail.focus();
-        return false;
     } else if(storeBizNumCheck == false) {
         alert("사업자 중복체크 버튼을 눌러주세요.");
         return false;    
     } else {
         if(checkLength(storeName, 1, 30)){
         if(checkLength(storeBizNum, 1, 10)) {
-        if(checkLength(storeBiz, 1, 10)) {
-        if(checkLength(storeType, 1, 10)) {
-        if(checkLength(storePhone, 8, 13)) {
-        if(checkLength(storeCeo, 1, 10)) {
+        if(checkLength(storeBiz, 0, 10)) {
+        if(checkLength(storeType, 0, 10)) {
+        if(checkLength(storePhone, 0, 13)) {
+        if(checkLength(storeCeo, 0, 10)) {
         // 여기부터
             if(!onlyKorNum.test(storeName.value.trim())) {
                 alert("상호명을 정확히 입력해주세요");

@@ -100,12 +100,11 @@ function checkInput() { //유효성
     const addr = document.getElementById('addr');
     const addrDetail = document.getElementById('addrDetail');
 
-    if(checkRequired([storeName, wholeName ,workPhone, addr ,addrDetail, workType
-        , zipCode, workTitle ])){
-        if(checkLength(workType, 1, 30)){
-        if(checkLength(workTitle, 1, 30)) {
-        if(checkLength(workPhone, 8, 13)) {
-        if(checkLength(storeName, 1, 20)) {     
+    if(checkRequired([storeName, wholeName ])){
+        if(checkLength(workType, 0, 30)){
+        if(checkLength(workTitle, 0, 30)) {
+        if(checkLength(workPhone, 0, 13)) {
+        if(checkLength(storeName, 0, 20)) {     
         // 여기부터 
             if(!onlyKorNum.test(storeName.value.trim())) {
                 alert("설치업소명을 정확히 입력해주세요.");

@@ -97,7 +97,7 @@
           <input type="text" name="storePhone" id="storePhone" placeholder="전화번호흫 입력해 주세요." alt="Rectangle118913310" class="frame-rectangle11891" />
           <input type="text" name="workManage" id="workManage" placeholder="업무관리번호" alt="Rectangle118943317" class="frame-rectangle11894" />
           <input type="text" name="workTxt" id="workTxt" placeholder="처리내용" alt="Rectangle118953317" class="frame-rectangle11895" />
-          <input type="text" name="addr" id="addr" placeholder="주소를 입력해 주세요." alt="Rectangle293310" class="frame-rectangle29" />
+          <input type="text" name="addr" id="addr" placeholder="주소를 입력해 주세요." alt="Rectangle293310" class="frame-rectangle29" readonly/>
           <input type="text" name="addrDetail" id="addrDetail" placeholder="상세 주소를 입력해 주세요." alt="Rectangle303310" class="frame-rectangle30" />
           <div class="frame-frame14">
             <div class="frame-frame1">
@@ -255,17 +255,17 @@
           </div>
           <div class="frame-component10">
             <span class="frame-rectangle119052" />
-            <span class="frame-text138">1</span>
+            <span class="frame-text138"></span>
             <span class="frame-text139"><span></span></span>
             <span class="frame-text141"><span></span></span>
             <span class="frame-text143"><span></span></span>
             <span class="frame-text145"><span></span></span>
           </div>
      {{-- 테이블끝 --}}
-          <input type="text" name="fixCode" placeholder="수리코드" class="frame-rectangle11906" />
-          <input type="text" name="amount" placeholder="수량" class="frame-rectangle11907 salesCostTotal" />
-          <input type="text" name="salesCost" placeholder="매출가" class="frame-rectangle11908 salesCostTotal" />
-          <input type="hidden" id="totalData" name="totalData" readonly>
+          <input type="text" name="fixCode" placeholder="수리코드" class="frame-rectangle11906 fixCode" />
+          <input type="text" name="amount" placeholder="수량" class="frame-rectangle11907 salesCostTotal amount" />
+          <input type="text" name="salesCost" placeholder="매출가" class="frame-rectangle11908 salesCostTotal salesCost" />
+          <input type="hidden" id="totalData" name="totalData" class="totalData "readonly>
           <div class="frame-footer">
             <img src="." alt="Rectangle33I404" class="frame-rectangle33" />
         @include('include.footer')
@@ -321,10 +321,10 @@
              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
          }
      });
- 
+
      //post 
-     $('#workProFrm').submit(function (e) {
-      e.preventDefault();
+    $('#workProFrm').submit(function (e) {
+        e.preventDefault();
         if(checkInput() === true) {
           $.ajax({
               data: new FormData(this),
@@ -333,9 +333,8 @@
               url: "{{ route('work.workProSave') }}",
               type: "POST",
               dataType: 'json',
-              success: function (data) {
-                  console.info(data);
-                  if(data.success == true) {
+              success: function (data) { 
+                  if(data.success == true) {         
                       $('#workProFrm').trigger("reset");
                       alert('저장성공');
                       location.reload();

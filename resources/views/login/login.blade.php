@@ -71,10 +71,8 @@ $(document).ready(function(){
                 type: "POST",
                 dataType: 'json',
                 success: function (data) {
-                    console.info(data);
                     if(data.success == true) {
                         $('#empFormBtn').trigger("reset");
-                        alert('수리기사 로그인 성공!');
                         location.href= "{{ url('master/wholeAdd') }}";
                     }
                 },
@@ -93,10 +91,8 @@ $(document).ready(function(){
                 type: "POST",
                 dataType: 'json',
                 success: function (data) {
-                    console.info(data);
                     if(data.success == true) {
                         $('#company_form').trigger("reset");
-                        alert('회사관리자 로그인 성공');
                         location.href= "{{ url('master/wholeAdd') }}";
                     }
                 },

@@ -35,7 +35,7 @@ class EmpLoginController extends Controller
         $response = array('response' => '', 'success'=> false);
         if ($validator->fails()) {
             $response['response'] = $validator->messages();
-            $response['status'] = 'noValidation';
+            $response['success'] = 'noValidation';
         } else {
             $empIceBizNum = str_replace('-', '', $request->empIceBizNum);
             $empPhone = str_replace('-', '', $request->empPhone);
@@ -48,21 +48,21 @@ class EmpLoginController extends Controller
 
             if(!$userInfo){
                 $response['response'] = ["message"=> "유저정보 정확하지않음" ];
-                $response['status'] = 'noUserinfo';
+                $response['success'] = false;
+                return Response::json($response);
             } else {
                 if(Hash::check($request->empPassword, $userInfo->EMP_PASSWORD)){
                     $request->session()->put('iceCode', $userInfo->ICE_CODE);
                     Session::put('iceConame', $userInfo->ICE_CONAME);
                     Session::put('empGroup', $userInfo->EMP_GROUP); 
                     Session::put('empCode', $userInfo->EMP_CODE); 
-                    Session::put('empName', $userInfo->EMP_NAME); 
                     Session::put('empType', $userInfo->EMP_TYPE); 
+                    Session::put('empName', $userInfo->EMP_NAME); 
                     Session::save();
                     $response['response'] = ["message"=> "수리기사 로그인 성공" ];
                     $response['success'] = true;
                 } else {
                     $response['response'] = ["message"=> "비밀번호 불일치" ];
-                    $response['status'] = 'noPass';
                     $response['success'] = false;
                 }
             }
@@ -70,10 +70,10 @@ class EmpLoginController extends Controller
         //Response 도우미에 헤더를 세 번째 매개변수로 전달
         return Response::json($response, 201,
         [
-            'iceCode' =>$userInfo->ICE_CODE,
-            'empGroup'=> $userInfo->EMP_GROUP,
-            'empCode' => $userInfo->EMP_CODE,
-            'empType' => $userInfo->EMP_TYPE,
+            'iceCode' =>@$userInfo->ICE_CODE ,
+            'empGroup'=> @$userInfo->EMP_GROUP,
+            'empCode' => @$userInfo->EMP_CODE,
+            'empType' => @$userInfo->EMP_TYPE,
         ]
         );
     }
@@ -82,12 +82,12 @@ class EmpLoginController extends Controller
         //$request->validate([
         $validator = Validator::make($request->all(), [ 
             'iceBizNum'=>'required',
-            'password'=>'required|min:3|max:12'
+            'password'=>'required|min:3|max:13'
         ]);
         $response = array('response' => '', 'success'=> false);
         if ($validator->fails()) {
             $response['response'] = $validator->messages();
-            $response['status'] = 'noValidation';
+            $response['success'] = "noValidation";
         } else {
             $bizNum = str_replace('-', '', $request->iceBizNum);
             $userInfo = DB::table('t_master_ice AS mi')
@@ -98,7 +98,7 @@ class EmpLoginController extends Controller
     
             if(!$userInfo){
                 $response['response'] = ["message"=> "유저정보 정확하지않음" ];
-                $response['status'] = 'noUserinfo';
+                $response['success'] = false;
             } else {
                 if(Hash::check($request->password, $userInfo->EMP_PASSWORD)){
                     $request->session()->put('iceCode', $userInfo->ICE_CODE);
@@ -111,7 +111,6 @@ class EmpLoginController extends Controller
                     $response['success'] = true;
                 } else {
                     $response['response'] = ["message"=> "비밀번호 불일치" ];
-                    $response['status'] = 'noPass';
                     $response['success'] = false;
                 }
             }
@@ -119,10 +118,10 @@ class EmpLoginController extends Controller
         // 네트워크-헤더 확인
         return Response::json($response, 201,
         [
-            'iceCode' =>$userInfo->ICE_CODE,
-            'empGroup'=> $userInfo->EMP_GROUP,
-            'empCode' => $userInfo->EMP_CODE,
-            'empType' => $userInfo->EMP_TYPE,
+            'iceCode' =>@$userInfo->ICE_CODE ,
+            'empGroup'=>@$userInfo->EMP_GROUP,
+            'empCode' =>@$userInfo->EMP_CODE,
+            'empType' =>@$userInfo->EMP_TYPE,
         ]);
     }
     public function dashboard() {

@@ -402,16 +402,19 @@ class MasterController extends Controller
         }
     }
 
-     // 사업자번호(업소) 중복 체크
-     public function storeNumCheck (Request $request) {
+    // 사업자번호(업소) 중복 체크
+    public function storeNumCheck (Request $request) {
         $storeNumCheck = DB::table('t_master_store')
         ->where('STORE_BIZ_NUM',$request->storeBizNum)
         ->count();
         if($storeNumCheck > 0) {
-            echo "fail";
+            $response['response'] = ["message"=> "업소 사업자번호 중복" ];
+            $response['success'] = false;
         }else {
-            echo "중복이 아닙니다";
+            $response['response'] = ["message"=> "사용가능한 업소 사업자번호 입니다." ];
+            $response['success'] = true;
         }
+        return Response::json($response, 201);
     }
 
 

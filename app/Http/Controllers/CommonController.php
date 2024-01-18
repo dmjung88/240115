@@ -113,7 +113,7 @@ class CommonController extends Controller
     // 12 마이페이지 조회
     public function myPage() {
         $sql = "SELECT * FROM t_master_emp WHERE EMP_CODE = :id";
-        $userinfo = DB::selectOne($sql, ['id' => session()->has('loginId')]);
+        $userinfo = DB::selectOne($sql, ['id' => request()->empCode]);
         $response = array('response' => ["message"=> "EMP 개인정보", "data"=> $userinfo], 'success'=> true);
         return Response::json($response, 200);
     }
@@ -167,6 +167,28 @@ class CommonController extends Controller
         ->get();
         $response = array('response' => ["message"=> "영업사원 검색", "data"=> $empCodeSearch], 'success'=> true);
         return Response::json($response, 200);
+    }
+
+    // 16 마이페이지 업데이트
+    public function mypageSave(Request $request) {
+        $validator = Validator::make($request->all(), [ // Form_validation
+            'empName'  => 'required',
+            'empPhone' => 'required',
+            'empPassword' => 'required|confirmed',
+        ]);
+        $response = array('response' => '', 'success'=> false);
+        if ($validator->fails()) {
+            $response['response'] = $validator->messages();
+        } else {
+            DB::table('t_master_emp')->where('EMP_CODE', $request->empCode)->update([
+                'EMP_NAME' => $request->input('empName'),
+                'EMP_PHONE' => $request->input('empPhone'),
+                'EMP_PASSWORD' => Hash::make($request->input('empPassword')),
+            ]);
+            $response['response'] = ["message"=> "마이페이지 수정 성공" ];
+            $response['success'] = true;
+        }
+        return Response::json($response, 201);
     }
     
 }

@@ -1,6 +1,12 @@
 @extends('layouts.master')
 @section('content')
 
+
+<?php
+session_start();
+dd($_SESSION);
+?>
+
 <link
 rel="stylesheet"
 href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
@@ -287,6 +293,7 @@ href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
       <span class="frame-text28"><span>주소</span></span>
       <span class="frame-text30"><span>상세주소</span></span>
     {{-- 폼시작 --}}
+   
     <form id="wholeSaveForm" autocomplete="off">
         <input type="text" id="wholeName" name="wholeName" placeholder="도매장명을 입력해 주세요." class="frame-rectangle23" />
         <input type="text" id="wholePhone" name="wholePhone" placeholder="숫자만 입력해 주세요." class="frame-rectangle24" />
@@ -304,7 +311,7 @@ href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
         <input type="hidden" name="regId" value="{{ Session::get('empCode').' '.Session::get('empGroup')}}">
 
     @include('include.masterAddNav')
-
+  
     @include('include.mainNav')
       <div class="frame-btn-off-on">
         <div class="frame-btn-off-on1">

@@ -199,10 +199,11 @@ $('#storeBizNum').on("click", function(){
     }
 	$.ajax({
 		type : "post",
-		url : "/master/storeNumCheck",
+		url : "/api/master/storeNumCheck",
 		data : {storeBizNum : $('#storeBizNum').val()},
 		success : function(result){
-			if(result != 'fail'){
+            console.log(result)
+			if(result.success == true){
                 alert("사업자 번호 중복이 아닙니다.");
 				storeBizNumCheck = true;
 			} else {

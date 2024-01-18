@@ -24,13 +24,13 @@ Route::any('/model/CustomMethod', [App\Http\Controllers\HomeController::class, '
 Route::any('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/admin/dashboard',[SignUpController::class, 'dashboard'])->middleware('authCheck');
 
-Route::prefix('auth')->name('auth.')->middleware(['authCheck'])->group(function () {
-    Route::get('/login',[SignUpController::class, 'getLogin'])->name('getLogin');
-    Route::get('/register',[SignUpController::class, 'getRegister'])->name('getRegister');
-    Route::post('/login',[SignUpController::class, 'postLogin'])->name('postLogin');
-    Route::post('/register',[SignUpController::class, 'postRegister'])->name('postRegister');
-    Route::match(['get','post'], '/logout',[SignUpController::class, 'logout'])->name('logout');
-});
+// Route::prefix('auth')->name('auth.')->middleware(['authCheck'])->group(function () {
+//     Route::get('/login',[SignUpController::class, 'getLogin'])->name('getLogin');
+//     Route::get('/register',[SignUpController::class, 'getRegister'])->name('getRegister');
+//     Route::post('/login',[SignUpController::class, 'postLogin'])->name('postLogin');
+//     Route::post('/register',[SignUpController::class, 'postRegister'])->name('postRegister');
+//     Route::match(['get','post'], '/logout',[SignUpController::class, 'logout'])->name('logout');
+// });
 
 //로그인 
 Route::post('/personalLogin',[EmpLoginController::class, 'personalLogin'])->name('personalLogin');
@@ -65,7 +65,6 @@ Route::prefix('master')->middleware(['iceLoginCheck'])->group(function() {
     Route::get('fixAdd',[MasterController::class, 'fixAdd'])->name('master.fixAdd');
     Route::get('empAdd',[MasterController::class, 'empAdd'])->name('master.empAdd');
     Route::post('bizNumCheck',[MasterController::class, 'bizNumCheck'])->name('master.bizNumCheck');
-    Route::post('storeNumCheck',[MasterController::class, 'storeNumCheck'])->name('master.storeNumCheck');
 });
 
 // return View 파일 컨트롤러

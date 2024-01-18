@@ -34,7 +34,8 @@ Route::prefix('common')->group(function () {
     Route::post('/search/goodsType', [CommonController::class, 'goodsType']);
     Route::post('/view/wholesaleEmail', [CommonController::class, 'wholesaleEmailCheck']);
     Route::post('/search/fix', [CommonController::class, 'fixDataSearch']);
-    Route::get('/mypage', [CommonController::class, 'myPage']);
+    Route::post('/mypage', [CommonController::class, 'myPage']);
+    Route::post('/mypageSave', [CommonController::class, 'mypageSave']);
     Route::post('/emp/save', [CommonController::class, 'empSave']);
     Route::post('/emp/codeCheck', [CommonController::class, 'empNumCheck']);
     Route::post('/emp/empNameSearch', [CommonController::class, 'empNameSearch']);
@@ -56,6 +57,9 @@ Route::prefix('master')->group(function () {
     Route::post('/storeUpdate', [MasterController::class, 'storeUpdate']);
     Route::post('/goodsUpdate', [MasterController::class, 'goodsUpdate']);
     Route::post('/fixUpdate', [MasterController::class, 'fixUpdate']);
+
+    // 사업자번호
+    Route::post('/storeNumCheck',[MasterController::class, 'storeNumCheck'])->name('master.storeNumCheck');
 
 });
 

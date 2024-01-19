@@ -76,5 +76,7 @@ Route::prefix('view')->name('view.')->group(function () {
     Route::get('/bondNew',[ViewController::class, 'bondNew'])->name('bondNew'); 
     Route::get('/gyunjeokReport',[ViewController::class, 'gyunjeokReport'])->name('gyunjeokReport');
     Route::get('/aggregateReport',[ViewController::class, 'aggregateReport'])->name('aggregateReport');
+    Route::get('/mypage',[ViewController::class, 'mypage'])->name('mypage');
+    Route::get('/admin',[ViewController::class, 'adminPage'])->name('adminPage');
 });
 

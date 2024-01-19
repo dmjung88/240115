@@ -63,6 +63,7 @@ class MasterController extends Controller
                 'WHOLE_EMAIL' => $request->input('wholeEmail'),
                 'WHOLE_USEYN' => $request->input('chk_status'),
                 'REG_ID' => $request->get('regId'),
+                'REG_DATE' => now(),
                 'NOTE' => $request->input('note'),
                 'ADD1' => $request->input('add1'),
             ]);
@@ -106,6 +107,7 @@ class MasterController extends Controller
                 'STORE_USEYN' => $request->get('chk_status'),
                 'NOTE' => $request->get('note'),
                 'REG_ID' => $request->get('regId'),
+                'REG_DATE' => now(),
                 'APPLY_DATE' => $request->get('applyDate'),
             ]);
             $response['response'] = ["message"=> "업소저장 성공"];
@@ -176,6 +178,7 @@ class MasterController extends Controller
                 'NOTE' => $request->input('note'),
                 'LAST_MODIFY' => $request->input('lastModify'),
                 'REG_ID' => $request->get('regId'),
+                'REG_DATE' => now(),
             ]);
             $response['response'] = ["message"=> "수리정보 저장 성공" ];
             $response['success'] = true;
@@ -205,6 +208,7 @@ class MasterController extends Controller
                 'NOTE' => $request->input('note'),
                 'ADD1' => $request->input('add1'),
                 'REG_ID' => $request->get('regId'),
+                'REG_DATE' => now(),
             ]);
             $response['response'] = ["message"=> "수리기사 저장 성공" ];
             $response['success'] = true;

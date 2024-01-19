@@ -14,4 +14,10 @@
     <div class="page-gnb-gray">
       <span class="page-mainNav-text-white"><a href="{{ route('view.taxNew')}}">세금계산서</a></span>
     </div>
+    <div>
+      <span><a href="{{ route('view.mypage')}}">MyPage</a></span>
+    </div>
+    <div>
+      <span><a href="{{ route('view.adminPage')}}">관리자</a></span>
+    </div>
 </div>

@@ -74,40 +74,48 @@ class WorkController extends Controller
     //22 해당업무 저장
     public function workProSave(Request $request) {   
 
-        // dd($request->input());
         @$wholeCode = DB::selectOne("SELECT WHOLE_CODE FROM t_master_wholesale WHERE WHOLE_NAME = ?", [$request->wholeName]);
         @$storeCode = DB::selectOne("SELECT STORE_CODE,STORE_PHONE,STORE_BIZ FROM t_master_store WHERE STORE_NAME = ?", [$request->storeName]);
         @$goodsCode = DB::select("SELECT GOODS_CODE FROM t_master_goods WHERE GOODS_NAME = ?", [$request->goodsName]);
         
-        if(empty($storeCode->STORE_BIZ)) { // 상점정보 덮어씌우기
-            $rules = [
-                'newStoreName'=>'required|max:30|string|regex:/^[가-힣a-zA-Z0-9\s]+/',
-                'wholeName'=>'required|max:30',
-            ];
-            $response = array('response' => '', 'success'=> false);
-            $validator = Validator::make($request->all(), $rules); // Form_validation
-            if ($validator->fails()) {
-                $response['response'] = $validator->messages();
-                return response()->json($response);
-            } else {
-                DB::table('t_master_store')->updateOrInsert(
-                [
-                    'STORE_NAME' => $request->newStoreName
-                ],
-                [
-                    'ICE_CODE' => $request->get('iceCode'),
-                    'STORE_CODE' => "S" . Master::sCodeSeq(),
-                    'STORE_NAME' => $request->get('newStoreName'),
-                    'STORE_PHONE' => str_replace('-', '',$request->input('storePhone')),
-                    'STORE_ADDRESS' => $request->addr." ".$request->addrDetail,
-                    'STORE_ZIPCODE' => $request->get('zipCode'),
-                    'REG_ID' => $request->get('regId'),
-                    'APPLY_DATE' => now(),
-                    'WHOLE_CODE' => $wholeCode->WHOLE_CODE ?? "",
-                    'WHOLE_NAME' => $request->wholeName,
-                ]);
-            }
-        }     
+        // 가게명 중복검사
+        $storeCodeCheck = DB::table('t_master_store')
+        ->where('STORE_NAME',$request->storeName)
+        ->count();
+        if($storeCodeCheck > 0) {
+            $storeCode = $storeCode->STORE_CODE;
+        } else {
+            $storeCode = "S" . Master::sCodeSeq();
+        }
+
+        $rules = [
+            'newStoreName'=>'required|max:30|string|regex:/^[가-힣a-zA-Z0-9\s]+/',
+            'wholeName'=>'required|max:30',
+        ];
+        $response = array('response' => '', 'success'=> false);
+        $validator = Validator::make($request->all(), $rules); // Form_validation
+        if ($validator->fails()) {
+            $response['response'] = $validator->messages();
+            return response()->json($response);
+        } else {
+            DB::table('t_master_store')->updateOrInsert(
+            [
+                'STORE_NAME' => $request->newStoreName
+            ],
+            [
+                'ICE_CODE' => $request->get('iceCode'),
+                'STORE_CODE' => $storeCode,
+                'STORE_NAME' => $request->get('newStoreName'),
+                'STORE_PHONE' => str_replace('-', '',$request->input('storePhone')),
+                'STORE_ADDRESS' => $request->addr." ".$request->addrDetail,
+                'STORE_ZIPCODE' => $request->get('zipCode'),
+                'REG_ID' => $request->get('regId'),
+                'APPLY_DATE' => now(),
+                'WHOLE_CODE' => $wholeCode->WHOLE_CODE ?? "",
+                'WHOLE_NAME' => $request->wholeName,
+            ]);
+        }
+         
         $validator = Validator::make($request->all(), [ 
             'storeName' => 'required|regex:/^[ㄱ-ㅎ가-힣a-zA-Z0-9\s]+/|max:30', 
             'workDate'  => 'required|date', //'2020-01-01 00:00:00'

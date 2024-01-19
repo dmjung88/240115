@@ -8,6 +8,7 @@ use App\Http\Controllers\WorkController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\BondController;
 use App\Http\Controllers\TaxController;
+use App\Http\Controllers\View\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,4 +99,9 @@ Route::prefix('bond')->group(function() {
 //TaxController
 Route::prefix('taxInvoice')->group(function() {
     Route::get('/{wholesaleCode}', [TaxController::class, 'taxExcelSearch'])->name('tax.taxExcelSearch');
+});
+
+//관리자페이지의 회사정보 리스트 출력
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('/list', [ViewController::class, 'adminList'])->name('adminList');
 });

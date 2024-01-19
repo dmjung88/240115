@@ -54,6 +54,7 @@ class EmpLoginController extends Controller
                 if(Hash::check($request->empPassword, $userInfo->EMP_PASSWORD)){
                     $request->session()->put('iceCode', $userInfo->ICE_CODE);
                     Session::put('iceConame', $userInfo->ICE_CONAME);
+                    Session::put('empPhone', $userInfo->EMP_PHONE);
                     Session::put('empGroup', $userInfo->EMP_GROUP); 
                     Session::put('empCode', $userInfo->EMP_CODE); 
                     Session::put('empType', $userInfo->EMP_TYPE); 
@@ -105,6 +106,7 @@ class EmpLoginController extends Controller
                     Session::put('iceConame', $userInfo->ICE_CONAME);
                     Session::put('empGroup', $userInfo->EMP_GROUP); 
                     Session::put('empCode', $userInfo->EMP_CODE); 
+                    Session::put('empPhone', $userInfo->EMP_PHONE);
                     Session::put('empName', $userInfo->EMP_NAME); 
                     Session::save();
                     $response['response'] = ["message"=> "회사관리자 로그인 성공" ];

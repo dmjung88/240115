@@ -1,11 +1,6 @@
 @extends('layouts.master')
 @section('content')
 
-@php
-session_start();
-dd($_SESSION);
-@endphp
-
 <link href="{{ asset('css/style2.css') }}" rel="stylesheet" />
 <link href="{{ asset('css/index2.css') }}" rel="stylesheet" />
     <div>

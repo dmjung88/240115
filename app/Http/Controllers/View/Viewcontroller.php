@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Session;
 
-class Viewcontroller extends Controller
+class ViewController extends Controller
 {
     public function __construct()
     {
@@ -38,6 +38,30 @@ class Viewcontroller extends Controller
     }
     public function aggregateReport() {
         return view('report.aggregate',["title" => "집계현황" ]);
+    }
+    public function mypage(Request $request) {
+        $data['title'] ='마이페이지';
+        //dd($request->session()->all());
+        $data['userdata'] = DB::selectOne("SELECT * FROM t_master_emp WHERE EMP_CODE=?",[session()->get('empCode')]);
+        return view('mypage.index',$data);
+    }
+    public function adminPage() {
+        $title = "관리자";
+        return view('mypage.adminPage',compact("title"));
+    }
+    //관리자 페이지 회사전체
+    public function adminList(Request $request) {
+        $adminList = DB::table('t_cost_history',"ch")
+        ->join('t_master_ice AS mi', 'ch.ICE_CODE', 'mi.ICE_CODE')
+        ->select('mi.ICE_CODE',"mi.ICE_CONAME","ICE_ADDRESS","ICE_CEONAME","ICE_PHONE"
+        ,"ICE_CONNECT_EMP","ICE_STATUS","ICE_BANK_NAME","ICE_BANK_ACCOUNT","ICE_BANK_ACCOUNT_NAME"
+        ,"mi.NOTE","mi.JOIN_DATE","mi.UP_DATE"
+        ,"ch.IDX","ch.REG_DATE","COST_YYMM","COST_SUM","COST_BASIC","COST_MOBILE","COST_ADD")
+        ->where('ICE_CONAME', 'like', '%'.$request->iceConame.'%')
+        ->where('ICE_STATUS', 'like', "정상")
+        ->get();
+        $response = array('response' => ["message"=> "관리자페이지 회사리스트", "data"=> $adminList], 'success'=> true);
+        return Response::json($response, 200);
     }
    
 }

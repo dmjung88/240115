@@ -334,11 +334,11 @@
               type: "POST",
               dataType: 'json',
               success: function (data) { 
-                  if(data.success == true) {         
-                      $('#workProFrm').trigger("reset");
-                      alert('저장성공');
-                      location.reload();
-                  }
+                if(data.success == true) {         
+                    $('#workProFrm').trigger("reset");
+                    alert('저장성공');
+                    location.reload();
+                }
               },
               error: function (err) {
                   console.log('Error:', err);
